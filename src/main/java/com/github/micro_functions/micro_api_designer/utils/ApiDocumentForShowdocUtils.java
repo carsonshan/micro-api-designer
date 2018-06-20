@@ -113,7 +113,7 @@ public class ApiDocumentForShowdocUtils {
         sb.append("**简要描述：**").append("\n\n");
         sb.append("- ").append(apiDefinition.getComment()).append("\n\n");
         sb.append("**请求URL：**").append("\n\n");
-        sb.append("- ` ").append(_buildApiUrl(engineDefinition)).append(" `").append("\n\n");
+        sb.append("- ` ").append(_buildApiUrl(apiDefinition, engineDefinition)).append(" `").append("\n\n");
         sb.append("**请求方式：**").append("\n\n");
         sb.append("- POST").append("\n\n");
         sb.append("**参数：**").append("\n\n");
@@ -143,14 +143,14 @@ public class ApiDocumentForShowdocUtils {
         return sb.toString();
     }
 
-    private static String _buildApiUrl(EngineDefinition engineDefinition) {
+    private static String _buildApiUrl(ApiDefinition apiDefinition, EngineDefinition engineDefinition) {
         ServerAddressDefinition x = engineDefinition.getServerAddressDefinition();
-        return String.format("http://%s:%s%s", x.getHost(), x.getPort(), x.getUrl());
+        return String.format("http://%s:%s%s%s", x.getHost(), x.getPort(), x.getUrl(), apiDefinition.getName());
     }
 
     private static void _appendCommonRequestFieldDefinitions(ApiDefinition apiDefinition) {
         List<NestedFieldDefinition> commonFieldDefinitions = new ArrayList<>();
-        commonFieldDefinitions.add(_buildFieldDefinition("【接口名】<br/>" + apiDefinition.getName(), "apiName", "String", true, apiDefinition.getName()));
+        // commonFieldDefinitions.add(_buildFieldDefinition("【接口名】<br/>" + apiDefinition.getName(), "apiName", "String", true, apiDefinition.getName()));
         if (apiDefinition.getRequestDefinition() == null) {
             NestedEntityDefinition requestDefinition = new NestedEntityDefinition();
             requestDefinition.setFieldDefinitions(commonFieldDefinitions);
@@ -177,7 +177,7 @@ public class ApiDocumentForShowdocUtils {
     private static void _appendCommonResponseFieldDefinitions(ApiDefinition apiDefinition) {
         List<NestedFieldDefinition> commonFieldDefinitions = new ArrayList<>();
         commonFieldDefinitions.add(_buildFieldDefinition("错误码(0正常,非0错误)", "code", "Integer", true, MicroApiReserveResponseCodeEnum.success.getCode()));
-        commonFieldDefinitions.add(_buildFieldDefinition("错误提示", "message", "String", true, MicroApiReserveResponseCodeEnum.success.getMessage()));
+        commonFieldDefinitions.add(_buildFieldDefinition("错误提示", "msg", "String", true, MicroApiReserveResponseCodeEnum.success.getMessage()));
         if (apiDefinition.getResponseDefinition() == null) {
             NestedEntityDefinition responseDefinition = new NestedEntityDefinition();
             responseDefinition.setFieldDefinitions(commonFieldDefinitions);
