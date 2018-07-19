@@ -113,7 +113,11 @@ public class ApiDocumentForShowdocUtils {
     private static String _buildMarkdownForApi(ApiDefinition apiDefinition, EngineDefinition engineDefinition) {
         StringBuffer sb = new StringBuffer();
         sb.append("**简要描述：**").append("\n\n");
-        sb.append("- ").append(String.format("%s\n%s", apiDefinition.getComment(), StringUtils.isNoneBlank(apiDefinition.getDescription()) ? apiDefinition.getDescription() : "")).append("\n\n");
+        sb.append("- ").append(apiDefinition.getComment()).append("\n\n");
+        if (StringUtils.isNoneBlank(apiDefinition.getDescription())) {
+            sb.append("**详细描述：**").append("\n\n");
+            sb.append("- ").append(apiDefinition.getDescription()).append("\n\n");
+        }
         sb.append("**请求URL：**").append("\n\n");
         sb.append("- ` ").append(_buildApiUrl(apiDefinition, engineDefinition)).append(" `").append("\n\n");
         sb.append("**请求方式：**").append("\n\n");
