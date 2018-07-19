@@ -111,7 +111,7 @@ public class ApiDocumentForShowdocUtils {
     private static String _buildMarkdownForApi(ApiDefinition apiDefinition, EngineDefinition engineDefinition) {
         StringBuffer sb = new StringBuffer();
         sb.append("**简要描述：**").append("\n\n");
-        sb.append("- ").append(apiDefinition.getComment()).append("\n\n");
+        sb.append("- ").append(apiDefinition.getComment()).append("\n\n").append(apiDefinition.getDescription());
         sb.append("**请求URL：**").append("\n\n");
         sb.append("- ` ").append(_buildApiUrl(apiDefinition, engineDefinition)).append(" `").append("\n\n");
         sb.append("**请求方式：**").append("\n\n");
@@ -150,7 +150,9 @@ public class ApiDocumentForShowdocUtils {
 
     private static void _appendCommonRequestFieldDefinitions(ApiDefinition apiDefinition) {
         List<NestedFieldDefinition> commonFieldDefinitions = new ArrayList<>();
-        // commonFieldDefinitions.add(_buildFieldDefinition("【接口名】<br/>" + apiDefinition.getName(), "apiName", "String", true, apiDefinition.getName()));
+        // commonFieldDefinitions.add(_buildFieldDefinition("【接口名】<br/>" +
+        // apiDefinition.getName(), "apiName", "String", true,
+        // apiDefinition.getName()));
         if (apiDefinition.getRequestDefinition() == null) {
             NestedEntityDefinition requestDefinition = new NestedEntityDefinition();
             requestDefinition.setFieldDefinitions(commonFieldDefinitions);

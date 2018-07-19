@@ -5,7 +5,7 @@
 
     <groupId>com.github.micro-functions</groupId>
     <artifactId>micro-api-designer</artifactId>
-    <version>1.0.2.r2.patch20180620</version>
+    <version>1.0.2.r2.patch20180719</version>
     <packaging>jar</packaging>
 
     <name>micro-api-designer</name>
