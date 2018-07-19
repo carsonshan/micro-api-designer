@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.micro_functions.micro_api_core.enums.MicroApiReserveResponseCodeEnum;
@@ -111,7 +113,7 @@ public class ApiDocumentForShowdocUtils {
     private static String _buildMarkdownForApi(ApiDefinition apiDefinition, EngineDefinition engineDefinition) {
         StringBuffer sb = new StringBuffer();
         sb.append("**简要描述：**").append("\n\n");
-        sb.append("- ").append(apiDefinition.getComment()).append("\n\n").append(apiDefinition.getDescription());
+        sb.append("- ").append(String.format("%s\n%s", apiDefinition.getComment(), StringUtils.isNoneBlank(apiDefinition.getDescription()) ? apiDefinition.getDescription() : "")).append("\n\n");
         sb.append("**请求URL：**").append("\n\n");
         sb.append("- ` ").append(_buildApiUrl(apiDefinition, engineDefinition)).append(" `").append("\n\n");
         sb.append("**请求方式：**").append("\n\n");
